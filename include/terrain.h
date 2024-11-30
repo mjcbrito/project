@@ -18,4 +18,7 @@ int excavate(Terrain terrain, int row, int col);
 // Prints the terrain state
 void printTerrainState(const Terrain terrain);
 
+// Sets the value of a cell in the terrain
+void setTerrainValue(Terrain terrain, int row, int col, int value);
+
 #endif // TERRAIN_H

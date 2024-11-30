@@ -2,8 +2,6 @@
 #include <string.h>
 #include <stdio.h>
 #include "contest.h"
-#include "team.h"
-#include "terrain.h"
 
 struct Contest {
     Terrain terrain;

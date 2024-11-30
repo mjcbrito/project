@@ -10,9 +10,13 @@ struct Terrain {
 
 Terrain createTerrain(int rows, int cols) {
     Terrain t = malloc(sizeof(struct Terrain));
+    if (!t) return NULL;
     t->rows = rows;
     t->cols = cols;
     t->grid = malloc(rows * cols * sizeof(int));
+    for (int i = 0; i < rows * cols; i++) {
+        t->grid[i] = 0; // Initialize grid with zeros
+    }
     return t;
 }
 
@@ -30,9 +34,12 @@ int getBuriedTreasure(const Terrain terrain) {
 }
 
 int excavate(Terrain terrain, int row, int col) {
+    if (row < 0 || row >= terrain->rows || col < 0 || col >= terrain->cols) {
+        return -1; // Invalid coordinates
+    }
     int index = row * terrain->cols + col;
     int value = terrain->grid[index];
-    terrain->grid[index] = 0;
+    terrain->grid[index] = 0; // Excavated cells are set to zero
     return value;
 }
 
@@ -43,4 +50,12 @@ void printTerrainState(const Terrain terrain) {
         }
         printf("\n");
     }
+}
+
+void setTerrainValue(Terrain terrain, int row, int col, int value) {
+    if (row < 0 || row >= terrain->rows || col < 0 || col >= terrain->cols) {
+        fprintf(stderr, "Invalid coordinates: (%d, %d)\n", row, col);
+        return;
+    }
+    terrain->grid[row * terrain->cols + col] = value;
 }
